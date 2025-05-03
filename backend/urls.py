@@ -19,4 +19,6 @@ urlpatterns = [
     path('role-search/',role_search),
     path('news/',NewsView.as_view()),
     path('change-password/',change_password),
+    path('product/',ProductView.as_view()),
+    path('product-search/',product_search),
 ]

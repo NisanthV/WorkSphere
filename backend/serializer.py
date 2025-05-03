@@ -95,3 +95,12 @@ class NewsSerializer(ModelSerializer):
             "created_by":{"required":False},
             "organization":{"required":False}
         }
+
+class ProductSerializer(ModelSerializer):
+
+    class Meta:
+        model = Product
+        fields = '__all__'
+        extra_kwargs={
+            "organization":{"required":False}
+        }

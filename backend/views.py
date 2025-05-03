@@ -92,6 +92,19 @@ def change_password(request):
     response.data = "Password changed successfully."
     return response
 
+@api_view(['POST'])
+def product_search(request):
+    if isinstance(request.user, AnonymousUser):
+        return Response("Login required", status=status.HTTP_403_FORBIDDEN)
+
+    instance = Product.objects.filter(title__istartswith=request.data['title'])
+    if not instance.exists():
+        return Response("product not available", status=status.HTTP_404_NOT_FOUND)
+    paginator = JobPagination()
+    result_page = paginator.paginate_queryset(instance, request)
+    serialized = ProductSerializer(result_page, many=True)
+    return paginator.get_paginated_response(serialized.data)
+
 class RegistrationView(APIView):
 
     def post(self, request):
@@ -750,3 +763,71 @@ class NewsView(APIView):
         return Response(status=status.HTTP_403_FORBIDDEN)
 
 
+class ProductView(APIView):
+
+    def get(self, request):
+        if isinstance(request.user, AnonymousUser):
+            return Response("Login required", status=status.HTTP_403_FORBIDDEN)
+        org = getattr(request.user, 'organization', None)
+        if not org:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        instance = Product.objects.filter(organization_id=org.id)
+        if not instance.exists():
+            return Response("product not available", status=status.HTTP_404_NOT_FOUND)
+        paginator = JobPagination()
+        result_page = paginator.paginate_queryset(instance, request)
+        serialized = ProductSerializer(result_page, many=True)
+        return paginator.get_paginated_response(serialized.data)
+
+    def post(self, request):
+        if isinstance(request.user, AnonymousUser):
+            return Response("Login required", status=status.HTTP_403_FORBIDDEN)
+
+        user = request.user
+        if user.role.name in ("super admin", "admin"):
+            org = None
+            if user.role.name == "super admin":
+                org = Organization.objects.filter(created_by=user).first()
+                if not org:
+                    return Response("org not found", status=status.HTTP_404_NOT_FOUND)
+            if user.role.name == "admin":
+                org = Organization.objects.filter(id=user.organization.id).first()
+                if not org:
+                    return Response("org not found", status=status.HTTP_404_NOT_FOUND)
+
+            # DRF handles both form fields and files in request.data
+            serializer = ProductSerializer(data=request.data)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save(organization=org)
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+
+    def delete(self, request):
+        if isinstance(request.user, AnonymousUser):
+            return Response("Login required", status=status.HTTP_403_FORBIDDEN)
+
+        user = request.user
+        org = Organization.objects.filter(id=user.organization.id).first()
+        if not org:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        # Accept both int and dict for organization
+        org_id = None
+        org_data = request.data.get('organization')
+        if isinstance(org_data, dict):
+            org_id = org_data.get('id')
+        else:
+            org_id = org_data
+
+        if not org_id:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        if user.role.name in ("super admin", "admin") and org.id == org_id:
+            product = Product.objects.filter(id=request.data['id']).first()
+            if not product:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+            product.delete()
+            return Response(status=status.HTTP_200_OK)
+
+        return Response(status=status.HTTP_403_FORBIDDEN)

@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'backend',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+'django_cleanup.apps.CleanupConfig'
 ]
 
 MIDDLEWARE = [
@@ -139,6 +140,9 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / "build" / "static",        # ← points at build/static
 ]
+
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL  = '/media/'
 
 
 # Default primary key field type

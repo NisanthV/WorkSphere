@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.files.storage import FileSystemStorage
 from django.db.models import Model
 
 
@@ -61,4 +62,13 @@ class Application(models.Model):
     applied_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.job.title
+
+
+class Product (models.Model):
+
+    title = models.CharField(max_length=20)
+    content = models.TextField()
+    organization = models.ForeignKey('Organization',on_delete=models.CASCADE)
+    path = models.ImageField(upload_to='products/%Y/%m/',blank=True,null=True)
+    added = models.DateTimeField(auto_now_add=True)
 
