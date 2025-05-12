@@ -1,7 +1,5 @@
 from http.client import responses
-
 from django.views.decorators.csrf import ensure_csrf_cookie
-
 from rest_framework.decorators import api_view
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.exceptions import AuthenticationFailed
