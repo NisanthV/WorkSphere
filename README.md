@@ -4,16 +4,7 @@ hierarchies
 • Implemented efficient data operations using Django ORM  
 • Frontend served as API consumer (MVP ReactJS)
 
-# CycleGAN Image Converter
-
-This repository implements a web-based interface for CycleGAN, enabling users to convert images between two domains using state-of-the-art Generative Adversarial Networks (GANs). The project is built with Django and PyTorch, and provides a user-friendly platform for uploading images, running them through pre-trained CycleGAN models, and viewing the results in a gallery.
-
-## Features
-
-- Image-to-Image Translation: Convert images between two distinct domains (e.g., SAR ↔ Optical) using CycleGAN.
-- Web Interface: Simple and modern web UI built with Django templates and custom CSS for image upload, conversion, history, and user authentication.
-- Pre-trained Models: The backend loads pre-trained CycleGAN generator weights for both A→B and B→A translation directions.
-- User Accounts & History: Users can register, log in, and view a history of their image conversions.
+WorkSphere- Organization & Hiring System
 
 
 ## Getting Started
