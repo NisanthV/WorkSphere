@@ -29,8 +29,8 @@ Installation
 
 1. Clone the repository
     ```bash
-    git clone https://github.com/NisanthV/cycleGAN.git
-    cd cycleGAN
+    git clone https://github.com/NisanthV/cycleGAN.git](https://github.com/NisanthV/WorkSphere.git)
+    cd WorkSphere
     ```
 
 3. Install dependencies:
@@ -38,20 +38,17 @@ Installation
     pip install -r requirements.txt
     ```
 
-4. Download Pre-trained Models:
-    - Place `latest_net_G_A.pth` and `latest_net_G_B.pth` CycleGAN generator weights in the `myapp/models/` directory.
-
-5. Run Migrations:
+4. Run Migrations:
     ```bash
     python manage.py migrate
     ```
 
-6. Start the Development Server:
+5. Start the Development Server:
     ```bash
     python manage.py runserver
     ```
 
-7. Access the Web App:
+6. Access the Web App:
     - Open your browser and go to `http://127.0.0.1:8000/`
 
 
