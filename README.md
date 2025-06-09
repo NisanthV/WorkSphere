@@ -1,6 +1,6 @@
 ## WorkSphere- Organization & Hiring System
 
-• Engineered secure REST API with JWT authentication 
+• Secure REST API with JWT authentication 
 • Designed relational database schemas for organizational 
 hierarchies 
 • Implemented efficient data operations using Django ORM  
