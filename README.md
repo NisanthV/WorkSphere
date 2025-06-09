@@ -4,7 +4,6 @@
 • Designed relational database schemas for organizational 
 hierarchies 
 • Implemented efficient data operations using Django ORM  
-• Frontend served as API consumer (MVP ReactJS)
 
 
 ## Getting Started
