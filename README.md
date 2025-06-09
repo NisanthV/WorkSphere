@@ -3,7 +3,9 @@
 • Secure REST API with JWT authentication 
 • Designed relational database schemas for organizational 
 hierarchies 
-• Implemented efficient data operations using Django ORM  
+• Implemented efficient data operations using Django ORM 
+
+### ER Diagram
 ![ER](https://github.com/user-attachments/assets/6c836b7e-475f-45ed-b1a6-911ec0b931a7)
 
 
