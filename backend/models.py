@@ -39,7 +39,7 @@ class Role(models.Model):
 
 
 class News(models.Model):
-    title = models.CharField(max_length=30,null=True)
+    title = models.CharField(max_length=30,null=False)
     content = models.TextField()
     organization = models.ForeignKey('Organization',on_delete=models.CASCADE)
     created_by = models.ForeignKey('User',on_delete=models.CASCADE)
@@ -51,7 +51,7 @@ class News(models.Model):
 class Job(models.Model):
     title = models.CharField(max_length=30,null=True)
     content = models.TextField()
-    role = models.CharField(max_length=20,null=True)
+    role = models.CharField(max_length=20,null=False)
     organization = models.ForeignKey('Organization',on_delete=models.CASCADE,null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -66,7 +66,7 @@ class Application(models.Model):
 
 class Product (models.Model):
 
-    title = models.CharField(max_length=20)
+    title = models.CharField(max_length=20,null=False)
     content = models.TextField()
     organization = models.ForeignKey('Organization',on_delete=models.CASCADE)
     path = models.ImageField(upload_to='products/%Y/%m/',blank=True,null=True)

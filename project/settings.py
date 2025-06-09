@@ -81,17 +81,25 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'job_database',
+        'USER': 'root',
+        'PASSWORD': '0123456789',
+        'HOST': 'localhost',
+        'PORT': '3306'
+    }
+}
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'job_database',
-#         'USER': 'root',
-#         'PASSWORD': '0123456789',
-#         'HOST': 'localhost',
-#         'PORT': '3306'
+#         'NAME': 'giri29$job_database',
+#         'USER': 'giri29',
+#         'PASSWORD': 'Rk5Y:H-K8zwf8nj',
+#         'HOST': 'giri29.mysql.pythonanywhere-services.com',
 #     }
 # }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
